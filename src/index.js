@@ -1,13 +1,26 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
+import './app/layout/styles.css';
+import App from './app/layout/App';
 import * as serviceWorker from './serviceWorker';
 
+const rootEL=document.getElementById('root');
+
+function render() {
+  ReactDOM.render(<App/>,rootEL)
+}
+if(module.hot){
+  module.hot.accept('./app/layout/App',function(){
+
+    setTimeout(render);
+  })
+}
+render();
+
 ReactDOM.render(
-  <React.StrictMode>
+ 
     <App />
-  </React.StrictMode>,
+  ,
   document.getElementById('root')
 );
 
