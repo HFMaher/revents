@@ -1,19 +1,34 @@
-import React,{useState} from 'react';
-import { Button, Container } from 'semantic-ui-react';
+import React from 'react';
+import { Container } from 'semantic-ui-react';
 import EventDashboard from '../../features/events/eventDashboard/EventDashboard';
 import Navbar from '../../features/nav/NavBar';
+import {Route} from 'react-router-dom';
+import HomePage from '../../features/home/HomePage';
+import EventDetailedPage from '../../features/events/eventDetailed/EventDetailedPage';
+import EventForm from '../../features/events/eventForm/EventForm';
 
 
 export default function App() {
-  const [formOpen,setFormOpen]=useState(false);
+  
+   
   return (
     <>
-    <Navbar setFormOpen={setFormOpen}/>
+     <Route exact path='/' component={HomePage}/>
+     <Route 
+     path={'/(.+)'}
+     render={()=>(
+       <>
+    <Navbar />
     <Container className='main'>
-    <EventDashboard formOpen={formOpen} setFormOpen={setFormOpen}/>
+    
+     <Route exact path='/events' component={EventDashboard}/>
+     <Route path='/events/:id' component={EventDetailedPage}/>
+     <Route path={['/createEvent','/manage/:id']} component={EventForm}/>
     </Container>
     </>
+  )}
+/>
+</>
   );
-}
-
+     }
 
